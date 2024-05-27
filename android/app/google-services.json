@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "904138116779",
+    "project_id": "crud-ta",
+    "storage_bucket": "crud-ta.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:904138116779:android:a63ef74d92a941a9dab1ee",
+        "android_client_info": {
+          "package_name": "com.android.application"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIysDZFksqSbpimkxlhV8g9rwx7FXBe_8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:904138116779:android:ffde356ca6727a81dab1ee",
+        "android_client_info": {
+          "package_name": "com.example.logprota"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIysDZFksqSbpimkxlhV8g9rwx7FXBe_8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
