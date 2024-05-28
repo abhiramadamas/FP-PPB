@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logprota/ui/views/logbook/logbook_page.dart';
+import 'package:logprota/ui/views/logbook_page.dart';
+import 'package:logprota/ui/views/tugas_akhir.dart';
 
 class MainNavigation extends StatefulWidget {
   const MainNavigation({super.key});
@@ -30,6 +32,11 @@ class _MainNavigationState extends State<MainNavigation> {
           NavigationDestination(
             selectedIcon: Icon(Icons.message),
             icon: Icon(Icons.message_outlined),
+            label: 'Tugas Akhir',
+          ),
+          NavigationDestination(
+            selectedIcon: Icon(Icons.message),
+            icon: Icon(Icons.message_outlined),
             label: 'Logbook',
           ),
         ],
@@ -46,6 +53,7 @@ class _MainNavigationState extends State<MainNavigation> {
             ),
           ),
         ),
+        const TugasAkhir(),
         const LogbookPage(),
       ][currentPageIndex],
     );
