@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class FirestoreService {
 //   Get collection data
   final CollectionReference bimbingans = FirebaseFirestore.instance.collection('bimbingans');
+  final CollectionReference tugasAkhir = FirebaseFirestore.instance.collection('tugasAkhir');
 
 // Create
   Future<void> tambahBimbingan(String bimbingan){
@@ -21,4 +22,13 @@ class FirestoreService {
 // UPDATE
 
 // DELETE
+  Future<void> tambahTugasAkhir(String judul, String rencana, String pembimbing){
+    return bimbingans.add({
+      'judul': judul,
+      'rencana' : rencana,
+      'pembimbing' : pembimbing,
+      'timestamp': Timestamp.now(),
+    });
+  }
+
 }
