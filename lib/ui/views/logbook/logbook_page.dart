@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:logprota/ui/views/logbook/logbook_add_page.dart';
+import 'package:logprota/ui/views/logbook/logbook_detail_page.dart';
 
 class LogbookPage extends StatelessWidget {
   const LogbookPage({super.key});
@@ -65,13 +67,22 @@ class LogbookPage extends StatelessWidget {
                       ),
                       SizedBox(height: 10.0),
                       LogbookItemCard(
-                          createdAt: "29 April 2024 15.30", number: 3),
+                        id: "first id",
+                        createdAt: "29 April 2024 15.30",
+                        number: 3,
+                      ),
                       SizedBox(height: 8.0),
                       LogbookItemCard(
-                          createdAt: "29 April 2024 12.15", number: 2),
+                        id: "second id",
+                        createdAt: "29 April 2024 12.15",
+                        number: 2,
+                      ),
                       SizedBox(height: 8.0),
                       LogbookItemCard(
-                          createdAt: "13 Maret 2024 13.30", number: 1),
+                        id: "third id",
+                        createdAt: "13 Maret 2024 13.30",
+                        number: 1,
+                      ),
                       SizedBox(height: 8.0),
                     ],
                   ),
@@ -84,7 +95,11 @@ class LogbookPage extends StatelessWidget {
       floatingActionButton: FloatingActionButton.extended(
         label: const Text("Tambah Bimbingan"),
         icon: const Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () async {
+          await Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const LogbookAddPage()),
+          );
+        },
       ),
     );
   }
@@ -93,14 +108,24 @@ class LogbookPage extends StatelessWidget {
 class LogbookItemCard extends StatelessWidget {
   final String createdAt;
   final int number;
+  final String id;
   const LogbookItemCard(
-      {super.key, required this.createdAt, required this.number});
+      {super.key,
+      required this.createdAt,
+      required this.number,
+      required this.id});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        print("hello tanpped");
+      onTap: () async {
+        await Navigator.of(context).push(
+          MaterialPageRoute(
+              builder: (context) => LogbookDetailPage(
+                    logbookId: id,
+                    number: number,
+                  )),
+        );
       },
       child: Container(
         decoration: BoxDecoration(
