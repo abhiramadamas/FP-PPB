@@ -1,21 +1,42 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:logprota/models/logbook.dart';
+import 'package:logprota/services/logbook_service.dart';
 
-class LogbookAddPage extends StatefulWidget {
-  const LogbookAddPage({super.key});
+class LogbookFormPage extends StatefulWidget {
+  final String? logbookId;
+  final String? note;
+  final Timestamp? date;
+  const LogbookFormPage({super.key, this.logbookId, this.note, this.date});
 
   @override
-  State<LogbookAddPage> createState() => _LogbookAddPageState();
+  State<LogbookFormPage> createState() => _LogbookFormPageState();
 }
 
-class _LogbookAddPageState extends State<LogbookAddPage> {
+class _LogbookFormPageState extends State<LogbookFormPage> {
   final formKey = GlobalKey<FormState>();
   final noteController = TextEditingController();
   final dateController = TextEditingController();
+  final _logbookService = LogbookService();
+  @override
+  void initState() {
+    super.initState();
+    if (widget.note != null) {
+      noteController.text = widget.note!;
+    }
+    if (widget.date != null) {
+      DateTime dateTime = widget.date!.toDate();
+      dateController.text = dateTime.toString().split(" ")[0];
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    String formTitle =
+        widget.logbookId != null ? "Tambah Logbook" : "Edit Logbook";
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Tambah bimbingan"),
+        title: Text(formTitle),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 20.0),
@@ -50,6 +71,7 @@ class _LogbookAddPageState extends State<LogbookAddPage> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
+                      controller: noteController,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: "Catatan bimbingan",
@@ -64,22 +86,7 @@ class _LogbookAddPageState extends State<LogbookAddPage> {
                       },
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (formKey.currentState!.validate()) {
-                          // If the form is valid, display a snackbar. In the real world,
-                          // you'd often call a server or save the information in a database.
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                content: Text('Menyimpan logbook bimbingan')),
-                          );
-                        }
-                      },
-                      child: const Text("Simpan"),
-                    ),
-                  ),
+                  _saveButton(),
                 ],
               ),
             ),
@@ -90,9 +97,10 @@ class _LogbookAddPageState extends State<LogbookAddPage> {
   }
 
   Future<void> _selectDate() async {
+    DateTime initialDate = widget.date?.toDate() ?? DateTime.now();
     DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
+      initialDate: initialDate,
       firstDate: DateTime(2000),
       lastDate: DateTime(2100),
     );
@@ -101,5 +109,35 @@ class _LogbookAddPageState extends State<LogbookAddPage> {
         dateController.text = picked.toString().split(" ")[0];
       });
     }
+  }
+
+  Widget _saveButton() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16),
+      child: ElevatedButton(
+        style: const ButtonStyle(
+          backgroundColor: WidgetStatePropertyAll<Color>(Colors.blue),
+          foregroundColor: WidgetStatePropertyAll<Color>(Colors.white),
+        ),
+        onPressed: () {
+          if (formKey.currentState!.validate()) {
+            DateTime dateTime = DateTime.parse(dateController.text);
+            Logbook logbook = Logbook(
+              note: noteController.text,
+              date: Timestamp.fromDate(dateTime),
+            );
+            if (widget.logbookId != null) {
+              // save edit
+              _logbookService.updateLogbook(widget.logbookId!, logbook);
+            } else {
+              // save add
+              _logbookService.addLogbook(logbook);
+            }
+            Navigator.of(context).pop();
+          }
+        },
+        child: const Text("Simpan"),
+      ),
+    );
   }
 }

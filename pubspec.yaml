@@ -37,6 +37,9 @@ dependencies:
   cupertino_icons: ^1.0.6
   shimmer_animation: ^2.1.0+1
   firebase_core: ^2.32.0
+  cloud_firestore: ^4.17.5
+  timeago: ^3.6.1
+  intl: ^0.19.0
 
 dev_dependencies:
   flutter_test:
