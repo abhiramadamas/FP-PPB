@@ -20,3 +20,10 @@ Dibuat oleh Kelompok 1:
 Pengguna dapat menyimpan logbook bimbingan berisi komentar atau revisi yang diberikan oleh dosen pembimbing.
 
 ![logprota fitur logbook](https://github.com/albugowy15/image-upload/assets/49820990/e28c223f-15e7-42a9-a99d-0bfe05f6fae6)
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
+
+![Alt text](image/TugasAkhir.png "Tugas Akhir")
+
+![Alt text](image/Usulan.png "Usulan TA")
