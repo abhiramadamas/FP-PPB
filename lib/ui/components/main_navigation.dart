@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:logprota/ui/views/logbook/logbook_page.dart';
-import 'package:logprota/ui/views/logbook_page.dart';
 import 'package:logprota/ui/views/tugas_akhir.dart';
 
 class MainNavigation extends StatefulWidget {

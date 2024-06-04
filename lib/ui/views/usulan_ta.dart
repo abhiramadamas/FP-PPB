@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../services/firestore.dart';
 
 class UsulanTA extends StatefulWidget {
-  const UsulanTA({Key? key}) : super(key: key);
+  const UsulanTA({super.key});
 
   @override
   State<UsulanTA> createState() => _UsulanTAState();
@@ -18,7 +18,7 @@ class _UsulanTAState extends State<UsulanTA> {
   final TextEditingController pembimbingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Scaffold (
+    return Scaffold(
       appBar: AppBar(
         title: const Text(
           "Usulan TA",
@@ -38,8 +38,7 @@ class _UsulanTAState extends State<UsulanTA> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        'Informasi'
-                            .toUpperCase(),
+                        'Informasi'.toUpperCase(),
                         style: const TextStyle(
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
@@ -50,8 +49,7 @@ class _UsulanTAState extends State<UsulanTA> {
                       ),
                       const SizedBox(height: 20.0),
                       Text(
-                        'Rencana Penelitian'
-                            .toUpperCase(),
+                        'Rencana Penelitian'.toUpperCase(),
                         style: const TextStyle(
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
@@ -62,8 +60,7 @@ class _UsulanTAState extends State<UsulanTA> {
                       ),
                       const SizedBox(height: 20.0),
                       Text(
-                        'Pembimbing'
-                            .toUpperCase(),
+                        'Pembimbing'.toUpperCase(),
                         style: const TextStyle(
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
@@ -75,7 +72,10 @@ class _UsulanTAState extends State<UsulanTA> {
                       const SizedBox(height: 20.0),
                       ElevatedButton(
                           onPressed: () {
-                            firestoreService.tambahTugasAkhir(judulController.text, rencanaController.text, pembimbingController.text);
+                            firestoreService.tambahTugasAkhir(
+                                judulController.text,
+                                rencanaController.text,
+                                pembimbingController.text);
 
                             judulController.clear();
                             rencanaController.clear();
@@ -92,7 +92,7 @@ class _UsulanTAState extends State<UsulanTA> {
           ),
         ),
       ),
-
     );
   }
 }
+
