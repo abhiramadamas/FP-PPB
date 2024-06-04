@@ -5,7 +5,7 @@ import '../../services/firestore.dart';
 import 'usulan_ta.dart';
 
 class TugasAkhir extends StatefulWidget {
-  const TugasAkhir({Key? key}) : super(key: key);
+  const TugasAkhir({super.key});
 
   @override
   State<TugasAkhir> createState() => _TugasAkhirState();
@@ -74,9 +74,9 @@ class _TugasAkhirState extends State<TugasAkhir> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Text(
+                      const Text(
                         "Tugas Akhir Saya",
-                        style: const TextStyle(
+                        style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 21.0),
                       ),
                       const Text(
@@ -114,28 +114,34 @@ class _TugasAkhirState extends State<TugasAkhir> {
                           if (snapshot.hasError) {
                             return Text('Error: ${snapshot.error}');
                           }
-                          if (snapshot.connectionState == ConnectionState.waiting) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
                             return const CircularProgressIndicator();
                           }
-                          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                          if (!snapshot.hasData ||
+                              snapshot.data!.docs.isEmpty) {
                             return const Text('No Tugas Akhir available');
                           }
 
-                          return Container(
+                          return SizedBox(
                             height: 400.0, // Set a fixed height for the list
                             child: ListView.builder(
                               itemCount: snapshot.data!.docs.length,
                               itemBuilder: (context, index) {
-                                DocumentSnapshot document = snapshot.data!.docs[index];
-                                Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+                                DocumentSnapshot document =
+                                    snapshot.data!.docs[index];
+                                Map<String, dynamic> data =
+                                    document.data() as Map<String, dynamic>;
                                 return ListTile(
                                   title: Text(data['judul']),
                                   subtitle: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text('Rencana: ${data['rencana']}'),
                                       Text('Pembimbing: ${data['pembimbing']}'),
-                                      Text('Timestamp: ${data['timestamp'].toDate()}'),
+                                      Text(
+                                          'Timestamp: ${data['timestamp'].toDate()}'),
                                     ],
                                   ),
                                   trailing: Row(
@@ -147,31 +153,48 @@ class _TugasAkhirState extends State<TugasAkhir> {
                                           showDialog(
                                             context: context,
                                             builder: (context) {
-                                              final TextEditingController judulController = TextEditingController(text: data['judul']);
-                                              final TextEditingController rencanaController = TextEditingController(text: data['rencana']);
-                                              final TextEditingController pembimbingController = TextEditingController(text: data['pembimbing']);
+                                              final TextEditingController
+                                                  judulController =
+                                                  TextEditingController(
+                                                      text: data['judul']);
+                                              final TextEditingController
+                                                  rencanaController =
+                                                  TextEditingController(
+                                                      text: data['rencana']);
+                                              final TextEditingController
+                                                  pembimbingController =
+                                                  TextEditingController(
+                                                      text: data['pembimbing']);
 
                                               return AlertDialog(
-                                                title: const Text('Update Tugas Akhir'),
+                                                title: const Text(
+                                                    'Update Tugas Akhir'),
                                                 content: SingleChildScrollView(
                                                   child: Column(
                                                     children: [
                                                       TextField(
-                                                        controller: judulController,
-                                                        decoration: const InputDecoration(
+                                                        controller:
+                                                            judulController,
+                                                        decoration:
+                                                            const InputDecoration(
                                                           labelText: 'Judul',
                                                         ),
                                                       ),
                                                       TextField(
-                                                        controller: rencanaController,
-                                                        decoration: const InputDecoration(
+                                                        controller:
+                                                            rencanaController,
+                                                        decoration:
+                                                            const InputDecoration(
                                                           labelText: 'Rencana',
                                                         ),
                                                       ),
                                                       TextField(
-                                                        controller: pembimbingController,
-                                                        decoration: const InputDecoration(
-                                                          labelText: 'Pembimbing',
+                                                        controller:
+                                                            pembimbingController,
+                                                        decoration:
+                                                            const InputDecoration(
+                                                          labelText:
+                                                              'Pembimbing',
                                                         ),
                                                       ),
                                                     ],
@@ -180,19 +203,23 @@ class _TugasAkhirState extends State<TugasAkhir> {
                                                 actions: [
                                                   TextButton(
                                                     onPressed: () {
-                                                      Navigator.of(context).pop();
+                                                      Navigator.of(context)
+                                                          .pop();
                                                     },
                                                     child: const Text('Cancel'),
                                                   ),
                                                   ElevatedButton(
                                                     onPressed: () {
-                                                      firestoreService.updateTugasAkhir(
+                                                      firestoreService
+                                                          .updateTugasAkhir(
                                                         document.id,
                                                         judulController.text,
                                                         rencanaController.text,
-                                                        pembimbingController.text,
+                                                        pembimbingController
+                                                            .text,
                                                       );
-                                                      Navigator.of(context).pop();
+                                                      Navigator.of(context)
+                                                          .pop();
                                                     },
                                                     child: const Text('Update'),
                                                   ),
@@ -208,8 +235,10 @@ class _TugasAkhirState extends State<TugasAkhir> {
                                           showDialog(
                                             context: context,
                                             builder: (context) => AlertDialog(
-                                              title: const Text('Delete Tugas Akhir'),
-                                              content: const Text('Are you sure you want to delete this Tugas Akhir?'),
+                                              title: const Text(
+                                                  'Delete Tugas Akhir'),
+                                              content: const Text(
+                                                  'Are you sure you want to delete this Tugas Akhir?'),
                                               actions: [
                                                 TextButton(
                                                   onPressed: () {
@@ -219,7 +248,9 @@ class _TugasAkhirState extends State<TugasAkhir> {
                                                 ),
                                                 ElevatedButton(
                                                   onPressed: () {
-                                                    firestoreService.deleteTugasAkhir(document.id);
+                                                    firestoreService
+                                                        .deleteTugasAkhir(
+                                                            document.id);
                                                     Navigator.of(context).pop();
                                                   },
                                                   child: const Text('Delete'),
