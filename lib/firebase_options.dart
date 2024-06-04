@@ -50,19 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCIysDZFksqSbpimkxlhV8g9rwx7FXBe_8',
-    appId: '1:904138116779:android:ffde356ca6727a81dab1ee',
-    messagingSenderId: '904138116779',
-    projectId: 'crud-ta',
-    storageBucket: 'crud-ta.appspot.com',
+    apiKey: 'AIzaSyDzXAJKdXGZhW8HxkEIGiR-rp94fzLxmRA',
+    appId: '1:407883390549:android:40d263bbc145a901137edc',
+    messagingSenderId: '407883390549',
+    projectId: 'logprota',
+    storageBucket: 'logprota.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBFxv-2L4gJtOtpj7YloxBQ92XuOTqVAvk',
-    appId: '1:904138116779:ios:61f6f0443adff83ddab1ee',
-    messagingSenderId: '904138116779',
-    projectId: 'crud-ta',
-    storageBucket: 'crud-ta.appspot.com',
+    apiKey: 'AIzaSyAEaUUqUhi-97i2zU7zA9S0sUCBJk0fag4',
+    appId: '1:407883390549:ios:b9bf057487b13ace137edc',
+    messagingSenderId: '407883390549',
+    projectId: 'logprota',
+    storageBucket: 'logprota.appspot.com',
     iosBundleId: 'com.example.logprota',
   );
+
 }

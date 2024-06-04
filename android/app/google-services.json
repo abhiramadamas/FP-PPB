@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "904138116779",
-    "project_id": "crud-ta",
-    "storage_bucket": "crud-ta.appspot.com"
+    "project_number": "407883390549",
+    "project_id": "logprota",
+    "storage_bucket": "logprota.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:904138116779:android:a63ef74d92a941a9dab1ee",
+        "mobilesdk_app_id": "1:407883390549:android:40d263bbc145a901137edc",
         "android_client_info": {
-          "package_name": "com.android.application"
+          "package_name": "com.example.logprota"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCIysDZFksqSbpimkxlhV8g9rwx7FXBe_8"
+          "current_key": "AIzaSyDzXAJKdXGZhW8HxkEIGiR-rp94fzLxmRA"
         }
       ],
       "services": {
@@ -26,15 +26,15 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:904138116779:android:ffde356ca6727a81dab1ee",
+        "mobilesdk_app_id": "1:407883390549:android:06d5492c4110626f137edc",
         "android_client_info": {
-          "package_name": "com.example.logprota"
+          "package_name": "com.ppb.logprota"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCIysDZFksqSbpimkxlhV8g9rwx7FXBe_8"
+          "current_key": "AIzaSyDzXAJKdXGZhW8HxkEIGiR-rp94fzLxmRA"
         }
       ],
       "services": {
