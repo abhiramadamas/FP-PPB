@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "407883390549",
+    "project_id": "logprota",
+    "storage_bucket": "logprota.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:407883390549:android:40d263bbc145a901137edc",
+        "android_client_info": {
+          "package_name": "com.example.logprota"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzXAJKdXGZhW8HxkEIGiR-rp94fzLxmRA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:407883390549:android:06d5492c4110626f137edc",
+        "android_client_info": {
+          "package_name": "com.ppb.logprota"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzXAJKdXGZhW8HxkEIGiR-rp94fzLxmRA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
