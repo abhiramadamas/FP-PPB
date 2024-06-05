@@ -172,12 +172,12 @@ class _RegisterPageState extends State<RegisterPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
                     // google button
-                    SquareTile(imagePath: 'image/google.png'),
+                    SquareTile(imagePath: 'lib/images/google.png'),
 
                     SizedBox(width: 25),
 
                     // apple button
-                    SquareTile(imagePath: 'image/apple.png')
+                    SquareTile(imagePath: 'lib/images/apple.png')
                   ],
                 ),
 

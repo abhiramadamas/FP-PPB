@@ -87,10 +87,11 @@ class _LoginPageState extends State<LoginPage> {
             
                 // welcome back, you've been missed!
                 Text(
-                  'Welcome back you\'ve been missed!',
+                  'LogProTA',
                   style: TextStyle(
                     color: Colors.grey[700],
                     fontSize: 16,
+                    fontWeight: FontWeight.bold
                   ),
                 ),
             
@@ -173,12 +174,12 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
                     // google button
-                    SquareTile(imagePath: 'image/google.png'),
+                    SquareTile(imagePath: 'lib/images/google.png'),
             
                     SizedBox(width: 25),
             
                     // apple button
-                    SquareTile(imagePath: 'image/apple.png')
+                    SquareTile(imagePath: 'lib/images/apple.png')
                   ],
                 ),
             
