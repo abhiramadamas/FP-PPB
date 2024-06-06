@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:logprota/ui/components/main_navigation.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:logprota/ui/views/auth/auth_page.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const MainNavigation(),
+      home: const AuthPage(),
     );
   }
 }

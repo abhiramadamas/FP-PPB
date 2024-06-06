@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mitchkoko_firebaseauth/pages/login_page.dart';
-import 'package:mitchkoko_firebaseauth/pages/register_page.dart';
+import 'package:logprota/ui/views/auth/login_page.dart';
+import 'package:logprota/ui/views/auth/register_page.dart';
 
 class LoginOrRegisterPage extends StatefulWidget {
   const LoginOrRegisterPage({super.key});
