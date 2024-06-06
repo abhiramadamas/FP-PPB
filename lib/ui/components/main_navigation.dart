@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logprota/ui/views/logbook/logbook_page.dart';
 import 'package:logprota/ui/views/tugas_akhir.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class MainNavigation extends StatefulWidget {
   const MainNavigation({super.key});
@@ -11,9 +12,19 @@ class MainNavigation extends StatefulWidget {
 
 class _MainNavigationState extends State<MainNavigation> {
   int currentPageIndex = 0;
+  //sign out method
+  void signUserOut() {
+    FirebaseAuth.instance.signOut();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(actions: [
+        IconButton(
+            onPressed: signUserOut,
+            icon: Icon(Icons.logout)
+        )
+      ],),
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {
           setState(() {

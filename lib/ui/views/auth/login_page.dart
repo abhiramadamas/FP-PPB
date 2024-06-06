@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mitchkoko_firebaseauth/components/my_button.dart';
-import 'package:mitchkoko_firebaseauth/components/my_textfield.dart';
-import 'package:mitchkoko_firebaseauth/components/square_tile.dart';
+import 'package:logprota/ui/components/my_button.dart';
+import 'package:logprota/ui/components/my_textfield.dart';
+import 'package:logprota/ui/components/square_tile.dart';
 
 class LoginPage extends StatefulWidget {
   final Function()? onTap;
@@ -87,10 +87,11 @@ class _LoginPageState extends State<LoginPage> {
             
                 // welcome back, you've been missed!
                 Text(
-                  'Welcome back you\'ve been missed!',
+                  'LogProTA',
                   style: TextStyle(
                     color: Colors.grey[700],
                     fontSize: 16,
+                    fontWeight: FontWeight.bold
                   ),
                 ),
             
