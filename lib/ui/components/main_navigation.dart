@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:logprota/ui/views/logbook/logbook_page.dart';
+import 'package:logprota/ui/views/berita/berita_page.dart';
 import 'package:logprota/ui/views/tugas_akhir.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -49,6 +50,11 @@ class _MainNavigationState extends State<MainNavigation> {
             icon: Icon(Icons.message_outlined),
             label: 'Logbook',
           ),
+          NavigationDestination(
+            selectedIcon: Icon(Icons.message),
+            icon: Icon(Icons.newspaper),
+            label: 'Berita',
+          ),
         ],
       ),
       body: <Widget>[
@@ -65,6 +71,7 @@ class _MainNavigationState extends State<MainNavigation> {
         ),
         const TugasAkhir(),
         const LogbookPage(),
+        const BeritaPage()
       ][currentPageIndex],
     );
   }
