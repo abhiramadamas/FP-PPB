@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:logprota/ui/components/my_button.dart';
 import 'package:logprota/ui/components/my_textfield.dart';
@@ -21,23 +20,20 @@ class _LoginPageState extends State<LoginPage> {
 
   // sign user in method
   void signUserIn() async {
-    
     //show loading circle
     showDialog(
-        context: context,
-        builder: (context) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        },
+      context: context,
+      builder: (context) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
     );
 
     // try sign in
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: emailController.text,
-          password: passwordController.text
-      );
+          email: emailController.text, password: passwordController.text);
 
       // pop circle loading
       Navigator.pop(context);
@@ -47,21 +43,17 @@ class _LoginPageState extends State<LoginPage> {
 
       //wrong email or pass
       showErrorMessage(e.code);
-
     }
   }
-  
+
   void showErrorMessage(String message) {
     showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Center(
-                child: Text(
-                  message
-                )),
-          );
-        },
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Center(child: Text(message)),
+        );
+      },
     );
   }
 
@@ -76,45 +68,44 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(height: 50),
-            
+
                 // logo
                 const Icon(
                   Icons.lock,
                   size: 100,
                 ),
-            
+
                 const SizedBox(height: 50),
-            
+
                 // welcome back, you've been missed!
                 Text(
                   'LogProTA',
                   style: TextStyle(
-                    color: Colors.grey[700],
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold
-                  ),
+                      color: Colors.grey[700],
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold),
                 ),
-            
+
                 const SizedBox(height: 25),
-            
+
                 // email textfield
                 MyTextField(
                   controller: emailController,
                   hintText: 'Email',
                   obscureText: false,
                 ),
-            
+
                 const SizedBox(height: 10),
-            
+
                 // password textfield
                 MyTextField(
                   controller: passwordController,
                   hintText: 'Password',
                   obscureText: true,
                 ),
-            
+
                 const SizedBox(height: 10),
-            
+
                 // forgot password?
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -128,17 +119,17 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                 ),
-            
+
                 const SizedBox(height: 25),
-            
+
                 // sign in button
                 MyButton(
                   text: "Sign in",
                   onTap: signUserIn,
                 ),
-            
+
                 const SizedBox(height: 50),
-            
+
                 // or continue with
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -166,25 +157,25 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                 ),
-            
+
                 const SizedBox(height: 50),
-            
+
                 // google + apple sign in buttons
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     // google button
                     SquareTile(imagePath: 'lib/images/google.png'),
-            
+
                     SizedBox(width: 25),
-            
+
                     // apple button
                     SquareTile(imagePath: 'lib/images/apple.png')
                   ],
                 ),
-            
+
                 const SizedBox(height: 50),
-            
+
                 // not a member? register now
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -214,3 +205,4 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
+

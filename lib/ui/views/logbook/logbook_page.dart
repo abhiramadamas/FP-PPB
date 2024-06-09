@@ -17,19 +17,6 @@ class _LogbookPageState extends State<LogbookPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Logbook Bimbingan",
-        ),
-        //actions: const [
-        //  Padding(
-        //    padding: EdgeInsets.all(10.0),
-        //    child: Icon(
-        //      Icons.account_circle,
-        //    ),
-        //  ),
-        //],
-      ),
       body: _buildUi(),
       floatingActionButton: FloatingActionButton.extended(
         label: const Text("Tambah Bimbingan"),
@@ -45,9 +32,10 @@ class _LogbookPageState extends State<LogbookPage> {
 
   Widget _buildUi() {
     return SafeArea(
-        child: Column(
-      children: [_logbookListView()],
-    ));
+      child: Expanded(
+        child: _logbookListView(),
+      ),
+    );
   }
 
   Widget _logbookListView() {

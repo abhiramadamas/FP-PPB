@@ -17,19 +17,6 @@ class _BeritaPageState extends State<BeritaPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Berita Tugas Akhir",
-        ),
-        //actions: const [
-        //  Padding(
-        //    padding: EdgeInsets.all(10.0),
-        //    child: Icon(
-        //      Icons.account_circle,
-        //    ),
-        //  ),
-        //],
-      ),
       body: _buildUi(),
       floatingActionButton: FloatingActionButton.extended(
         label: const Text("Tambah Berita"),
@@ -45,9 +32,10 @@ class _BeritaPageState extends State<BeritaPage> {
 
   Widget _buildUi() {
     return SafeArea(
-        child: Column(
-          children: [_beritaListView()],
-        ));
+      child: Expanded(
+        child: _beritaListView(),
+      ),
+    );
   }
 
   Widget _beritaListView() {
@@ -69,7 +57,7 @@ class _BeritaPageState extends State<BeritaPage> {
               Berita berita = news[index].data();
               String judul = berita.judul;
               String formatedDate =
-              DateFormat("dd MMMM yyyy").format(berita.createdAt!.toDate());
+                  DateFormat("dd MMMM yyyy").format(berita.createdAt!.toDate());
               String beritaId = news[index].id;
 
               return Padding(

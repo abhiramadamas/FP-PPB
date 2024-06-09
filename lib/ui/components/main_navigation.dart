@@ -17,15 +17,21 @@ class _MainNavigationState extends State<MainNavigation> {
   void signUserOut() {
     FirebaseAuth.instance.signOut();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(actions: [
-        IconButton(
-            onPressed: signUserOut,
-            icon: Icon(Icons.logout)
-        )
-      ],),
+      appBar: AppBar(
+        title: const [
+          Text("Home"),
+          Text("Tugas Akhir"),
+          Text("Logbook"),
+          Text("Berita"),
+        ][currentPageIndex],
+        actions: [
+          IconButton(onPressed: signUserOut, icon: const Icon(Icons.logout))
+        ],
+      ),
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {
           setState(() {
