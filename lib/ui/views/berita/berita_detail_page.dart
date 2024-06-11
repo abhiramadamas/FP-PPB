@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:logprota/models/berita.dart';
@@ -45,21 +46,36 @@ class _BeritaDetailPageState extends State<BeritaDetailPage> {
         ],
       ),
       body: _beritaDetail(),
-      floatingActionButton: FloatingActionButton.extended(
-        label: const Text("Edit Berita"),
-        icon: const Icon(Icons.edit_outlined),
-        onPressed: () async {
-          await Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => BeritaFormPage(
-                beritaId: widget.beritaId,
-                note: berita.note,
-                judul: berita.judul,
-                departemen: berita.departemen,
-              ),
-            ),
-          );
-          _fetchBerita();
+      floatingActionButton: FutureBuilder<String?>(
+        future: getUserRole(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            // Return an empty container while waiting for the future to complete
+            return Container();
+          }
+          // Show the floating action button only if user is Dosen
+          if (snapshot.data == 'Dosen') {
+            return FloatingActionButton.extended(
+              label: const Text("Edit Berita"),
+              icon: const Icon(Icons.edit_outlined),
+              onPressed: () async {
+                await Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => BeritaFormPage(
+                      beritaId: widget.beritaId,
+                      note: berita.note,
+                      judul: berita.judul,
+                      departemen: berita.departemen,
+                    ),
+                  ),
+                );
+                _fetchBerita();
+              },
+            );
+          } else {
+            // Return an empty container if user is not Dosen
+            return Container();
+          }
         },
       ),
     );
@@ -192,5 +208,19 @@ class _BeritaDetailPageState extends State<BeritaDetailPage> {
         );
       },
     );
+  }
+
+  // Function to get user role from Firebase Authentication
+  Future<String?> getUserRole() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      String email = user.email!;
+      if (email.contains("@dosen.com")) {
+        return 'Dosen';
+      } else {
+        return 'Mahasiswa';
+      }
+    }
+    return null;
   }
 }

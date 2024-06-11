@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:logprota/models/berita.dart';
@@ -45,6 +46,7 @@ class _BeritaPageState extends State<BeritaPage> {
           itemBuilder: (context, index) {
             Berita berita = news[index].data();
             String judul = berita.judul;
+            String note = berita.note;
             String formatedDate =
                 DateFormat("dd MMMM yyyy").format(berita.createdAt!.toDate());
             String beritaId = news[index].id;
@@ -52,6 +54,7 @@ class _BeritaPageState extends State<BeritaPage> {
             return BeritaItemCard(
               createdAt: formatedDate,
               judul: judul,
+              note: note,
               id: beritaId,
             );
           },
@@ -59,5 +62,19 @@ class _BeritaPageState extends State<BeritaPage> {
         );
       },
     );
+  }
+
+  // Function to get user role from Firebase Authentication
+  Future<String?> getUserRole() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      String email = user.email!;
+      if (email.contains("@dosen.com")) {
+        return 'Dosen';
+      } else {
+        return 'Mahasiswa';
+      }
+    }
+    return null;
   }
 }
