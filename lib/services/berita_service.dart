@@ -27,6 +27,7 @@ class BeritaService {
     return Berita(
       note: beritaDoc["note"],
       judul: beritaDoc["judul"],
+      departemen: beritaDoc["departemen"],
       createdAt: beritaDoc["createdAt"],
     );
   }

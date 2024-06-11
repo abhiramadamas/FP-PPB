@@ -7,7 +7,8 @@ class BeritaFormPage extends StatefulWidget {
   final String? beritaId;
   final String? note;
   final String? judul;
-  const BeritaFormPage({super.key, this.beritaId, this.note, this.judul});
+  final String? departemen;
+  const BeritaFormPage({super.key, this.beritaId, this.note, this.judul, this.departemen});
 
   @override
   State<BeritaFormPage> createState() => _BeritaFormPageState();
@@ -17,6 +18,7 @@ class _BeritaFormPageState extends State<BeritaFormPage> {
   final formKey = GlobalKey<FormState>();
   final noteController = TextEditingController();
   final judulController = TextEditingController();
+  final departemenController = TextEditingController();
   final _beritaService = BeritaService();
   @override
   void initState() {
@@ -26,6 +28,9 @@ class _BeritaFormPageState extends State<BeritaFormPage> {
     }
     if (widget.judul != null) {
       judulController.text = widget.judul!;
+    }
+    if (widget.departemen != null) {
+      departemenController.text = widget.departemen!;
     }
   }
 
@@ -57,6 +62,22 @@ class _BeritaFormPageState extends State<BeritaFormPage> {
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return "Judul Berita wajib diisi";
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      controller: departemenController,
+                      decoration: const InputDecoration(
+                        labelText: "Departemen",
+                        border: OutlineInputBorder(),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Departemen wajib diisi";
                         }
                         return null;
                       },
@@ -103,6 +124,7 @@ class _BeritaFormPageState extends State<BeritaFormPage> {
             Berita berita = Berita(
               note: noteController.text,
               judul: judulController.text,
+              departemen: departemenController.text,
             );
             if (widget.beritaId != null) {
               // save edit

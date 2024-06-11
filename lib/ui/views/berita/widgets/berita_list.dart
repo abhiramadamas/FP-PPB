@@ -39,11 +39,14 @@ class BeritaItemCard extends StatelessWidget {
   final String createdAt;
   final String judul;
   final String id;
+  final String note;
   const BeritaItemCard(
       {super.key,
         required this.createdAt,
         required this.judul,
-        required this.id});
+        required this.id,
+        required this.note
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -71,17 +74,30 @@ class BeritaItemCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "${judul}",
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blue
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 8.0, 0, 8.0),
+                child: Text(
+                  "${judul}",
+                  style: const TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue
+                  ),
                 ),
               ),
               Text(
-                "Tanggal berita $createdAt",
+                "${note}",
                 style: const TextStyle(
-                  color: Colors.black54,
+                  color: Colors.black,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 8.0, 0, 8.0),
+                child: Text(
+                  "Tanggal berita $createdAt",
+                  style: const TextStyle(
+                    color: Colors.black54,
+                  ),
                 ),
               ),
             ],

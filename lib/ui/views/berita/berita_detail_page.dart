@@ -36,7 +36,7 @@ class _BeritaDetailPageState extends State<BeritaDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Detail Logbook"),
+        title: const Text("Detail Berita"),
         actions: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -55,6 +55,7 @@ class _BeritaDetailPageState extends State<BeritaDetailPage> {
                 beritaId: widget.beritaId,
                 note: berita.note,
                 judul: berita.judul,
+                departemen: berita.departemen,
               ),
             ),
           );
@@ -91,9 +92,17 @@ class _BeritaDetailPageState extends State<BeritaDetailPage> {
                 ),
               ),
               Text(
+                "Departemen ${berita.departemen}",
+                style: const TextStyle(
+                    fontSize: 16.0,
+                    color: Colors.black38
+                ),
+              ),
+              Text(
                 "Tanggal dibuat: $formatedDate",
                 style: const TextStyle(
                   fontSize: 16.0,
+                  color: Colors.black38
                 ),
               ),
               const SizedBox(height: 20.0),
