@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:logprota/ui/views/home/home_page.dart';
 import 'package:logprota/ui/views/logbook/logbook_page.dart';
 import 'package:logprota/ui/views/berita/berita_page.dart';
 import 'package:logprota/ui/views/tugas_akhir.dart';
@@ -38,6 +39,7 @@ class _MainNavigationState extends State<MainNavigation> {
             currentPageIndex = index;
           });
         },
+        backgroundColor: Colors.white,
         indicatorColor: Colors.amber,
         selectedIndex: currentPageIndex,
         destinations: const [
@@ -48,12 +50,12 @@ class _MainNavigationState extends State<MainNavigation> {
           ),
           NavigationDestination(
             selectedIcon: Icon(Icons.message),
-            icon: Icon(Icons.message_outlined),
+            icon: Icon(Icons.book_outlined),
             label: 'Tugas Akhir',
           ),
           NavigationDestination(
             selectedIcon: Icon(Icons.message),
-            icon: Icon(Icons.message_outlined),
+            icon: Icon(Icons.note_outlined),
             label: 'Logbook',
           ),
           NavigationDestination(
@@ -64,17 +66,7 @@ class _MainNavigationState extends State<MainNavigation> {
         ],
       ),
       body: <Widget>[
-        const Card(
-          shadowColor: Colors.transparent,
-          margin: EdgeInsets.all(8.0),
-          child: SizedBox.expand(
-            child: Center(
-              child: Text(
-                'Home page',
-              ),
-            ),
-          ),
-        ),
+        const HomePage(),
         const TugasAkhir(),
         const LogbookPage(),
         const BeritaPage()
