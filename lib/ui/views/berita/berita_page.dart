@@ -17,7 +17,7 @@ class _BeritaPageState extends State<BeritaPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _buildUi(),
+      body: _beritaListView(),
       floatingActionButton: FloatingActionButton.extended(
         label: const Text("Tambah Berita"),
         icon: const Icon(Icons.add),
@@ -30,48 +30,34 @@ class _BeritaPageState extends State<BeritaPage> {
     );
   }
 
-  Widget _buildUi() {
-    return SafeArea(
-      child: Expanded(
-        child: _beritaListView(),
-      ),
-    );
-  }
-
   Widget _beritaListView() {
-    return SizedBox(
-      height: MediaQuery.sizeOf(context).height * 0.80,
-      width: MediaQuery.sizeOf(context).width,
-      child: StreamBuilder(
-        stream: _beritaService.getNews(),
-        builder: (context, snapshot) {
-          List news = snapshot.data?.docs ?? [];
-          if (news.isEmpty) {
-            return const Center(
-              child: Text("Tidak ada berita"),
-            );
-          }
-          return ListView.builder(
-            itemCount: news.length,
-            itemBuilder: (context, index) {
-              Berita berita = news[index].data();
-              String judul = berita.judul;
-              String formatedDate =
-                  DateFormat("dd MMMM yyyy").format(berita.createdAt!.toDate());
-              String beritaId = news[index].id;
-
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: BeritaItemCard(
-                  createdAt: formatedDate,
-                  judul: judul,
-                  id: beritaId,
-                ),
-              );
-            },
+    return StreamBuilder(
+      stream: _beritaService.getNews(),
+      builder: (context, snapshot) {
+        List news = snapshot.data?.docs ?? [];
+        if (news.isEmpty) {
+          return const Center(
+            child: Text("Tidak ada berita"),
           );
-        },
-      ),
+        }
+        return ListView.builder(
+          itemCount: news.length,
+          itemBuilder: (context, index) {
+            Berita berita = news[index].data();
+            String judul = berita.judul;
+            String formatedDate =
+                DateFormat("dd MMMM yyyy").format(berita.createdAt!.toDate());
+            String beritaId = news[index].id;
+
+            return BeritaItemCard(
+              createdAt: formatedDate,
+              judul: judul,
+              id: beritaId,
+            );
+          },
+          padding: const EdgeInsets.all(10.0),
+        );
+      },
     );
   }
 }
