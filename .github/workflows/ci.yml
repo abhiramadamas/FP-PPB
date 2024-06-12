@@ -1,8 +1,6 @@
 name: CI
 
 on:
-  push:
-    branches: ["main"]
   pull_request:
     branches: ["main"]
 
@@ -31,25 +29,3 @@ jobs:
         run: flutter build appbundle
       - name: Start release build apk version
         run: flutter build apk --split-per-abi
-
-  release:
-    name: Create Release
-    runs-on: ubuntu-latest
-    if: ${{ github.ref == 'refs/heads/main' }}
-    needs:
-      - build-android
-    steps:
-      - uses: googleapis/release-please-action@v4
-        id: release
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          release-type: dart
-      - name: Upload Release Artifact
-        if: ${{ steps.release.outputs.release_created }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh release upload ${{ steps.release.outputs.tag_name }} \
-            ./build/app/outputs/apk/release/*.apk
-          gh release upload ${{ steps.release.outputs.tag_name }} \
-            ./build/app/outputs/bundle/release/*.aab
