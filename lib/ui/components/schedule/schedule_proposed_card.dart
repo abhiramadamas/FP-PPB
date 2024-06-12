@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:logprota/common/helpers/date.dart';
 import 'package:logprota/models/schedule/schedule_proposed.dart';
-import 'package:logprota/models/user/mahasiswa.dart';
 
 class ScheduleProposedCard extends StatefulWidget {
   const ScheduleProposedCard({required this.scheduleProposed, super.key});
@@ -12,15 +12,13 @@ class ScheduleProposedCard extends StatefulWidget {
 }
 
 class _ScheduleProposedCardState extends State<ScheduleProposedCard> {
-  late List<Mahasiswa> mahasiswaVoted = [];
+  late List<String> mahasiswaVoted = [];
 
-  List<Mahasiswa> getMahasiswaVoted () {
+  List<String> getMahasiswaVoted() {
     return [
-      Mahasiswa(registration_code: '5025201001', name: 'Anto'),
-      Mahasiswa(registration_code: '5025201002', name: 'Geming'),
-      Mahasiswa(registration_code: '5025201003', name: 'Keren'),
-      Mahasiswa(registration_code: '5025201004', name: 'Sekali'),
-      Mahasiswa(registration_code: '5025201008', name: 'Juozzz'),
+      "Anto",
+      "Geming",
+      "BJIR"
     ];
   }
 
@@ -33,45 +31,52 @@ class _ScheduleProposedCardState extends State<ScheduleProposedCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(10),
+      width: double.infinity,
       child: Card(
-        child: Row(
-          children: [
-            Column(
-              children: [
-                Text(
-                  widget.scheduleProposed.schedule.toIso8601String(),
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      color: Colors.black),
-                ),
-                Text(
-                  "Total vote: ${widget.scheduleProposed.getTotalVote()}",
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      color: Colors.black),
-                )
-              ],
-            ),
-            ListView.builder(
-              itemCount: mahasiswaVoted.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  padding: const EdgeInsets.all(5),
-                  color: Colors.lightBlueAccent,
-                  child: Text(
-                    "${mahasiswaVoted[index].name} - ${mahasiswaVoted[index].registration_code}",
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.all(15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    datetimeToString(widget.scheduleProposed.schedule) as String,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 14.0
+                      fontSize: 16,
+                      color: Colors.black,
+                    ),
+                  ),
+                  Text(
+                    "Total vote: ${widget.scheduleProposed.getTotalVote()}",
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: Colors.black,
                     ),
                   )
-                );
-              },
-            )
-          ],
+                ],
+              ),
+              Column(
+                children: mahasiswaVoted.map((mahasiswa) => Container(
+                  padding: const EdgeInsets.all(10),
+                  margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 0),
+                  width: double.infinity,
+                  color: Colors.amberAccent,
+                  child: Text(
+                    mahasiswa,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14.0,
+                    ),
+                  ),
+                )).toList() as List<Widget>,
+              ),
+            ],
+          ),
         ),
       ),
     );

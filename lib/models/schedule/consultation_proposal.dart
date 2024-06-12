@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:logprota/models/schedule/schedule_proposed.dart';
 
 class Schema {
-  static final String id = "_id";
   static final String title = "title";
   static final String description = "description";
   static final String status = "status";
@@ -12,7 +11,6 @@ class Schema {
 }
 
 class ConsultationProposal {
-  final int? id;
   final String title;
   final String description;
   final String status;
@@ -22,7 +20,6 @@ class ConsultationProposal {
   final DateTime createdAt;
 
   ConsultationProposal({
-    this.id,
     required this.title,
     required this.description,
     required this.status,
@@ -42,6 +39,19 @@ class ConsultationProposal {
         return Colors.black;
       default:
         return Colors.black;
+    }
+  }
+
+  String getStatusTextDescription() {
+    switch (status) {
+      case 'created':
+        return 'DIBUAT';
+      case 'vote_closed':
+        return 'VOTE DITUTUP';
+      case 'done':
+        return 'SELESAI';
+      default:
+        return 'DIBUAT';
     }
   }
 
@@ -67,5 +77,25 @@ class ConsultationProposal {
       }
     }
     return mostVoted;
+  }
+
+  Map<String, Object?> toJson() => {
+    Schema.title: this.title,
+    Schema.description: this.description,
+    Schema.status: this.status,
+    Schema.scheduleProposed: this.scheduleProposed.map((schedule) => schedule.toJson()).toList(),
+    Schema.latestVote: this.latestVote.toIso8601String(),
+    Schema.createdAt: this.createdAt.toIso8601String()
+  };
+
+  static ConsultationProposal fromJson(Map<String, Object?> json){
+    return ConsultationProposal(
+        title: json[Schema.title] as String,
+        description: json[Schema.description] as String,
+        status: json[Schema.status] as String,
+        scheduleProposed: (json[Schema.scheduleProposed] as List<dynamic>).map((item) => (item as Map<String, Object?>)).toList().map((schedule) => ScheduleProposed.fromJson(schedule)).toList(),
+        latestVote: DateTime.parse(json[Schema.latestVote] as String),
+        createdAt: DateTime.parse(json[Schema.createdAt] as String)
+    );
   }
 }

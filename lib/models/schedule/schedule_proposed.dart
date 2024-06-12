@@ -5,7 +5,7 @@ class Schema {
 
 class ScheduleProposed {
   final DateTime schedule;
-  final List<int> vote;
+  final List<String> vote;
 
   ScheduleProposed({
     required this.schedule,
@@ -17,10 +17,12 @@ class ScheduleProposed {
     Schema.vote: this.vote ?? []
   };
 
-  static ScheduleProposed fromJson(Map<String, Object?> json) => ScheduleProposed(
-    schedule: DateTime.parse(json[Schema.schedule] as String),
-    vote: json[Schema.vote] as List<int>
-  );
+  static ScheduleProposed fromJson(Map<String, Object?> json){
+    return ScheduleProposed(
+        schedule: DateTime.parse(json[Schema.schedule] as String),
+        vote: (json[Schema.vote] as List<dynamic>).isEmpty ? [] : json[Schema.vote] as List<String>
+    );
+  }
 
   int getTotalVote() {
     return this.vote.length;

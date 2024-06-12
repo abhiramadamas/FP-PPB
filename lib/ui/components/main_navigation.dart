@@ -4,6 +4,7 @@ import 'package:logprota/services/tugasakhir_service.dart';
 import 'package:logprota/ui/views/home/home_page.dart';
 import 'package:logprota/ui/views/logbook/logbook_page.dart';
 import 'package:logprota/ui/views/berita/berita_page.dart';
+import 'package:logprota/ui/views/schedule/dosen/schedule_page.dart';
 import 'package:logprota/ui/views/tugas_akhir.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -33,6 +34,7 @@ class _MainNavigationState extends State<MainNavigation> {
           Text("Tugas Akhir"),
           Text("Logbook"),
           Text("Berita"),
+          Text("Jadwal Bimbingan")
         ][currentPageIndex],
         actions: [
           IconButton(onPressed: signUserOut, icon: const Icon(Icons.logout))
@@ -68,6 +70,11 @@ class _MainNavigationState extends State<MainNavigation> {
             icon: Icon(Icons.newspaper),
             label: 'Berita',
           ),
+          NavigationDestination(
+            selectedIcon: Icon(Icons.message),
+            icon: Icon(Icons.calendar_month),
+            label: 'Jadwal',
+          ),
         ],
       ),
       body: StreamBuilder<QuerySnapshot>(
@@ -85,7 +92,8 @@ class _MainNavigationState extends State<MainNavigation> {
             const HomePage(),
             TugasAkhir(userId: widget.userId),
             LogbookPage(tugasAkhirId: docId),
-            const BeritaPage()
+            const BeritaPage(),
+            const SchedulePage(),
           ][currentPageIndex];
         },
       ),
