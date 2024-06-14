@@ -1,4 +1,5 @@
 // screen_a.dart
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../services/firestore.dart';
@@ -16,6 +17,8 @@ class _UsulanTAState extends State<UsulanTA> {
   final TextEditingController judulController = TextEditingController();
   final TextEditingController rencanaController = TextEditingController();
   final TextEditingController pembimbingController = TextEditingController();
+  String userId = FirebaseAuth.instance.currentUser!.uid;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,19 +74,20 @@ class _UsulanTAState extends State<UsulanTA> {
                       ),
                       const SizedBox(height: 20.0),
                       ElevatedButton(
-                          onPressed: () {
-                            firestoreService.tambahTugasAkhir(
-                                judulController.text,
-                                rencanaController.text,
-                                pembimbingController.text);
-
-                            judulController.clear();
-                            rencanaController.clear();
-                            pembimbingController.clear();
-
-                            Navigator.pop(context);
-                          },
-                          child: const Text("Add"))
+                        onPressed: () {
+                          firestoreService.tambahTugasAkhir(
+                            judulController.text,
+                            rencanaController.text,
+                            pembimbingController.text,
+                            userId,
+                          );
+                          judulController.clear();
+                          rencanaController.clear();
+                          pembimbingController.clear();
+                          Navigator.pop(context);
+                        },
+                        child: const Text("Add"),
+                      )
                     ],
                   ),
                 ),
@@ -95,4 +99,3 @@ class _UsulanTAState extends State<UsulanTA> {
     );
   }
 }
-
