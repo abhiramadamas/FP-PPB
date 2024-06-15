@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.1.0](https://github.com/abhiramadamas/FP-PPB/compare/v1.0.0...v1.1.0) (2024-06-15)
+
+
+### Features
+
+* add user information add tugas akhir card at home page ([e6bcce2](https://github.com/abhiramadamas/FP-PPB/commit/e6bcce2f7dfbc891305b464b0049a89fcbe41bcd))
+
+
+### Bug Fixes
+
+* avoid display or create logbook if tugas akhir is empty ([fc7b372](https://github.com/abhiramadamas/FP-PPB/commit/fc7b37248cbbff052873d2eacfa02c8e9154f68c))
+* logbook form page appBar title ([074c4a5](https://github.com/abhiramadamas/FP-PPB/commit/074c4a5b10dcdd2cc1a82b5018820b3aac5d284f))
+
 ## 1.0.0 (2024-06-15)
 
 
