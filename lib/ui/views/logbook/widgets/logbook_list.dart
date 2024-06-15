@@ -39,11 +39,14 @@ class LogbookItemCard extends StatelessWidget {
   final String createdAt;
   final int number;
   final String id;
-  const LogbookItemCard(
-      {super.key,
-      required this.createdAt,
-      required this.number,
-      required this.id});
+  final String tugasAkhirId;
+  const LogbookItemCard({
+    super.key,
+    required this.createdAt,
+    required this.number,
+    required this.id,
+    required this.tugasAkhirId,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +55,7 @@ class LogbookItemCard extends StatelessWidget {
         await Navigator.of(context).push(
           MaterialPageRoute(
               builder: (context) => LogbookDetailPage(
+                    tugasAkhirId: tugasAkhirId,
                     logbookId: id,
                     number: number,
                   )),

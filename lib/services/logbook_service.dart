@@ -2,18 +2,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:logprota/models/logbook.dart';
 
 const String logbookCollectionRef = "logbooks";
+const String tugasAkhirCollectionRef = "tugasAkhir";
 
 class LogbookService {
   final _firestore = FirebaseFirestore.instance;
+  final String tugasAkhirId;
   late final CollectionReference _logbooksRef;
 
-  LogbookService() {
+  LogbookService(this.tugasAkhirId) {
     _logbooksRef = _firestore
-        .collection(logbookCollectionRef)
-        .withConverter<Logbook>(
-          fromFirestore: (snapshot, _) => Logbook.fromJson(snapshot.data()!),
-          toFirestore: (logbook, _) => logbook.toJson(),
-        );
+        .collection(tugasAkhirCollectionRef)
+        .doc(tugasAkhirId)
+        .collection(logbookCollectionRef);
   }
 
   Stream<QuerySnapshot> getLogbooks() {
@@ -33,7 +33,7 @@ class LogbookService {
 
   void addLogbook(Logbook logbook) async {
     logbook.createdAt = Timestamp.now();
-    await _logbooksRef.add(logbook);
+    await _logbooksRef.add(logbook.toJson());
   }
 
   void updateLogbook(String logbookId, Logbook logbook) {
