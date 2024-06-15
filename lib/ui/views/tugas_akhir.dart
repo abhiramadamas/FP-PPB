@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:logprota/services/tugasakhir_service.dart';
 import 'package:logprota/ui/views/usulan_ta.dart';
-import '../../services/firestore.dart';
 
 class TugasAkhir extends StatefulWidget {
   const TugasAkhir({super.key});
@@ -11,7 +11,7 @@ class TugasAkhir extends StatefulWidget {
 }
 
 class _TugasAkhirState extends State<TugasAkhir> {
-  final FirestoreService firestoreService = FirestoreService();
+  final TugasakhirService tugasakhirService = TugasakhirService();
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class _TugasAkhirState extends State<TugasAkhir> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: StreamBuilder<QuerySnapshot>(
-          stream: firestoreService.getTugasAkhirStream(),
+          stream: tugasakhirService.getTugasAkhirStream(),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
@@ -152,7 +152,7 @@ class _TugasAkhirState extends State<TugasAkhir> {
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              firestoreService.updateTugasAkhir(
+                              tugasakhirService.updateTugasAkhir(
                                 docId,
                                 judulController.text,
                                 rencanaController.text,
@@ -186,7 +186,7 @@ class _TugasAkhirState extends State<TugasAkhir> {
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            firestoreService.deleteTugasAkhir(docId);
+                            tugasakhirService.deleteTugasAkhir(docId);
                             Navigator.of(context).pop();
                           },
                           child: const Text('Delete'),

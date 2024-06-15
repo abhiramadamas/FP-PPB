@@ -1,8 +1,8 @@
 // screen_a.dart
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:logprota/services/tugasakhir_service.dart';
 
-import '../../services/firestore.dart';
 
 class UsulanTA extends StatefulWidget {
   const UsulanTA({super.key});
@@ -12,7 +12,7 @@ class UsulanTA extends StatefulWidget {
 }
 
 class _UsulanTAState extends State<UsulanTA> {
-  final FirestoreService firestoreService = FirestoreService();
+  final TugasakhirService tugasakhirService = TugasakhirService();
 
   final TextEditingController judulController = TextEditingController();
   final TextEditingController rencanaController = TextEditingController();
@@ -75,7 +75,7 @@ class _UsulanTAState extends State<UsulanTA> {
                       const SizedBox(height: 20.0),
                       ElevatedButton(
                         onPressed: () {
-                          firestoreService.tambahTugasAkhir(
+                          tugasakhirService.tambahTugasAkhir(
                             judulController.text,
                             rencanaController.text,
                             pembimbingController.text,
