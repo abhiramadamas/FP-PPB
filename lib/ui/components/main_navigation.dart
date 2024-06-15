@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:logprota/services/firestore.dart';
+import 'package:logprota/services/tugasakhir_service.dart';
 import 'package:logprota/ui/views/home/home_page.dart';
 import 'package:logprota/ui/views/logbook/logbook_page.dart';
 import 'package:logprota/ui/views/berita/berita_page.dart';
@@ -21,7 +21,7 @@ class _MainNavigationState extends State<MainNavigation> {
     FirebaseAuth.instance.signOut();
   }
 
-  final FirestoreService firestoreService = FirestoreService();
+  final TugasakhirService firestoreService = TugasakhirService();
 
   @override
   Widget build(BuildContext context) {
