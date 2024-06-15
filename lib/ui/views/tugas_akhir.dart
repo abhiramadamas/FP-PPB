@@ -4,7 +4,8 @@ import 'package:logprota/services/tugasakhir_service.dart';
 import 'package:logprota/ui/views/usulan_ta.dart';
 
 class TugasAkhir extends StatefulWidget {
-  const TugasAkhir({super.key});
+  final String userId;
+  const TugasAkhir({super.key, required this.userId});
 
   @override
   State<TugasAkhir> createState() => _TugasAkhirState();
@@ -19,7 +20,7 @@ class _TugasAkhirState extends State<TugasAkhir> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: StreamBuilder<QuerySnapshot>(
-          stream: tugasakhirService.getTugasAkhirStream(),
+          stream: tugasakhirService.getTugasAkhirStream(widget.userId),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
@@ -45,6 +46,7 @@ class _TugasAkhirState extends State<TugasAkhir> {
   Widget _loadingIndicator() {
     return const Center(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CircularProgressIndicator(),
         ],

@@ -14,7 +14,8 @@ class AuthPage extends StatelessWidget {
         builder: (context, snapshot) {
           // user is logged in
           if (snapshot.hasData) {
-            return const MainNavigation();
+            String userId = snapshot.data!.uid;
+            return MainNavigation(userId: userId);
           }
           // user is not logged in
           else {
@@ -25,4 +26,3 @@ class AuthPage extends StatelessWidget {
     );
   }
 }
-

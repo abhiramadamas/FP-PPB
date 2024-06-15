@@ -8,7 +8,8 @@ import 'package:logprota/ui/views/tugas_akhir.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class MainNavigation extends StatefulWidget {
-  const MainNavigation({super.key});
+  final String userId;
+  const MainNavigation({super.key, required this.userId});
 
   @override
   State<MainNavigation> createState() => _MainNavigationState();
@@ -70,29 +71,24 @@ class _MainNavigationState extends State<MainNavigation> {
         ],
       ),
       body: StreamBuilder<QuerySnapshot>(
-          stream: firestoreService.getTugasAkhirStream(),
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              const Center(child: Text("Terjadi Kesalahan"));
-            }
-            String docId = " ";
-            if (snapshot.hasData && snapshot.data!.docs.isNotEmpty) {
-              DocumentSnapshot document = snapshot.data!.docs[0];
-              docId = document.id;
-            }
-            return [
-              const HomePage(),
-              const TugasAkhir(),
-              LogbookPage(tugasAkhirId: docId),
-              const BeritaPage()
-            ][currentPageIndex];
-          }),
-      //body: <Widget>[
-      //  const HomePage(),
-      //  const TugasAkhir(),
-      //  const LogbookPage(),
-      //  const BeritaPage()
-      //][currentPageIndex],
+        stream: firestoreService.getTugasAkhirStream(widget.userId),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            const Center(child: Text("Terjadi Kesalahan"));
+          }
+          String? docId;
+          if (snapshot.hasData && snapshot.data!.docs.isNotEmpty) {
+            DocumentSnapshot document = snapshot.data!.docs[0];
+            docId = document.id;
+          }
+          return [
+            const HomePage(),
+            TugasAkhir(userId: widget.userId),
+            LogbookPage(tugasAkhirId: docId),
+            const BeritaPage()
+          ][currentPageIndex];
+        },
+      ),
     );
   }
 }
