@@ -6,22 +6,27 @@ import 'package:logprota/ui/views/logbook/logbook_form_page.dart';
 
 class LogbookDetailPage extends StatefulWidget {
   const LogbookDetailPage(
-      {super.key, required this.logbookId, required this.number});
+      {super.key,
+      required this.logbookId,
+      required this.number,
+      required this.tugasAkhirId});
   final String logbookId;
   final int number;
+  final String tugasAkhirId;
 
   @override
   State<LogbookDetailPage> createState() => _LogbookDetailPageState();
 }
 
 class _LogbookDetailPageState extends State<LogbookDetailPage> {
-  final LogbookService _logbookService = LogbookService();
+  late LogbookService _logbookService;
   late Logbook logbook;
   bool isLoading = true;
 
   @override
   void initState() {
     super.initState();
+    _logbookService = LogbookService(widget.tugasAkhirId);
     _fetchLogbook();
   }
 
@@ -52,6 +57,7 @@ class _LogbookDetailPageState extends State<LogbookDetailPage> {
           await Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => LogbookFormPage(
+                tugasAkhirId: widget.tugasAkhirId,
                 logbookId: widget.logbookId,
                 note: logbook.note,
                 date: logbook.date,

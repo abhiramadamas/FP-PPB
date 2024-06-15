@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:logprota/services/firestore.dart';
 import 'package:logprota/ui/views/home/home_page.dart';
 import 'package:logprota/ui/views/logbook/logbook_page.dart';
 import 'package:logprota/ui/views/berita/berita_page.dart';
@@ -18,6 +20,8 @@ class _MainNavigationState extends State<MainNavigation> {
   void signUserOut() {
     FirebaseAuth.instance.signOut();
   }
+
+  final FirestoreService firestoreService = FirestoreService();
 
   @override
   Widget build(BuildContext context) {
@@ -65,12 +69,30 @@ class _MainNavigationState extends State<MainNavigation> {
           ),
         ],
       ),
-      body: <Widget>[
-        const HomePage(),
-        const TugasAkhir(),
-        const LogbookPage(),
-        const BeritaPage()
-      ][currentPageIndex],
+      body: StreamBuilder<QuerySnapshot>(
+          stream: firestoreService.getTugasAkhirStream(),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              const Center(child: Text("Terjadi Kesalahan"));
+            }
+            String docId = " ";
+            if (snapshot.hasData && snapshot.data!.docs.isNotEmpty) {
+              DocumentSnapshot document = snapshot.data!.docs[0];
+              docId = document.id;
+            }
+            return [
+              const HomePage(),
+              const TugasAkhir(),
+              LogbookPage(tugasAkhirId: docId),
+              const BeritaPage()
+            ][currentPageIndex];
+          }),
+      //body: <Widget>[
+      //  const HomePage(),
+      //  const TugasAkhir(),
+      //  const LogbookPage(),
+      //  const BeritaPage()
+      //][currentPageIndex],
     );
   }
 }

@@ -7,7 +7,13 @@ class LogbookFormPage extends StatefulWidget {
   final String? logbookId;
   final String? note;
   final Timestamp? date;
-  const LogbookFormPage({super.key, this.logbookId, this.note, this.date});
+  final String tugasAkhirId;
+  const LogbookFormPage(
+      {super.key,
+      this.logbookId,
+      this.note,
+      this.date,
+      required this.tugasAkhirId});
 
   @override
   State<LogbookFormPage> createState() => _LogbookFormPageState();
@@ -17,10 +23,11 @@ class _LogbookFormPageState extends State<LogbookFormPage> {
   final formKey = GlobalKey<FormState>();
   final noteController = TextEditingController();
   final dateController = TextEditingController();
-  final _logbookService = LogbookService();
+  late LogbookService _logbookService;
   @override
   void initState() {
     super.initState();
+    _logbookService = LogbookService(widget.tugasAkhirId);
     if (widget.note != null) {
       noteController.text = widget.note!;
     }
