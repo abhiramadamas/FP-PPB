@@ -40,7 +40,7 @@ class _LogbookFormPageState extends State<LogbookFormPage> {
   @override
   Widget build(BuildContext context) {
     String formTitle =
-        widget.logbookId != null ? "Tambah Logbook" : "Edit Logbook";
+        widget.logbookId != null ? "Edit Logbook" : "Tambah Logbook";
     return Scaffold(
       appBar: AppBar(
         title: Text(formTitle),
