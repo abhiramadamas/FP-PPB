@@ -6,10 +6,9 @@ const String tugasAkhirCollectionRef = "tugasAkhir";
 
 class LogbookService {
   final _firestore = FirebaseFirestore.instance;
-  final String tugasAkhirId;
   late final CollectionReference _logbooksRef;
 
-  LogbookService(this.tugasAkhirId) {
+  LogbookService(String tugasAkhirId) {
     _logbooksRef = _firestore
         .collection(tugasAkhirCollectionRef)
         .doc(tugasAkhirId)

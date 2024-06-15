@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 const String tugasAkhirCollectionRef = "tugasAkhir";
 
@@ -28,9 +27,7 @@ class TugasakhirService {
   }
 
 // READ
-  Stream<QuerySnapshot> getTugasAkhirStream() {
-    User? user = FirebaseAuth.instance.currentUser;
-    String userId = user?.uid ?? "";
+  Stream<QuerySnapshot> getTugasAkhirStream(String userId) {
     final bimbinganStream = _tugasAkhirRef
         .where(
           "uid",
