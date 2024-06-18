@@ -54,11 +54,12 @@ class LogbookItemCard extends StatelessWidget {
       onTap: () async {
         await Navigator.of(context).push(
           MaterialPageRoute(
-              builder: (context) => LogbookDetailPage(
-                    tugasAkhirId: tugasAkhirId,
-                    logbookId: id,
-                    number: number,
-                  )),
+            builder: (context) => LogbookDetailPage(
+              tugasAkhirId: tugasAkhirId,
+              logbookId: id,
+              number: number,
+            ),
+          ),
         );
       },
       child: Container(
@@ -78,6 +79,7 @@ class LogbookItemCard extends StatelessWidget {
                 "Bimbingan ${number.toString()}",
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
+                  fontSize: 18.0,
                 ),
               ),
               Text(
