@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:logprota/models/berita.dart';
@@ -7,7 +6,8 @@ import 'package:logprota/ui/views/berita/berita_form_page.dart';
 import 'package:logprota/ui/views/berita/widgets/berita_list.dart';
 
 class BeritaPage extends StatefulWidget {
-  const BeritaPage({super.key});
+  final String userEmail;
+  const BeritaPage({super.key, required this.userEmail});
 
   @override
   State<BeritaPage> createState() => _BeritaPageState();
@@ -19,15 +19,7 @@ class _BeritaPageState extends State<BeritaPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _beritaListView(),
-      floatingActionButton: FloatingActionButton.extended(
-        label: const Text("Tambah Berita"),
-        icon: const Icon(Icons.add),
-        onPressed: () async {
-          await Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => const BeritaFormPage()),
-          );
-        },
-      ),
+      floatingActionButton: _addNewsFloatButton(),
     );
   }
 
@@ -64,17 +56,27 @@ class _BeritaPageState extends State<BeritaPage> {
     );
   }
 
-  // Function to get user role from Firebase Authentication
-  Future<String?> getUserRole() async {
-    User? user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      String email = user.email!;
-      if (email.contains("@dosen.com")) {
-        return 'Dosen';
-      } else {
-        return 'Mahasiswa';
-      }
+  Widget? _addNewsFloatButton() {
+    String userRole = getUserRole();
+    if (userRole != 'Dosen') {
+      return null;
     }
-    return null;
+    return FloatingActionButton.extended(
+      label: const Text("Tambah Berita"),
+      icon: const Icon(Icons.add),
+      onPressed: () async {
+        await Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const BeritaFormPage()),
+        );
+      },
+    );
+  }
+
+  // Function to get user role from Firebase Authentication
+  String getUserRole() {
+    if (widget.userEmail.contains("@dosen.com")) {
+      return 'Dosen';
+    }
+    return 'Mahasiswa';
   }
 }

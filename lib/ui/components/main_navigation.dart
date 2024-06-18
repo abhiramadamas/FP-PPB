@@ -8,8 +8,8 @@ import 'package:logprota/ui/views/tugas_akhir.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class MainNavigation extends StatefulWidget {
-  final String userId;
-  const MainNavigation({super.key, required this.userId});
+  final User user;
+  const MainNavigation({super.key, required this.user});
 
   @override
   State<MainNavigation> createState() => _MainNavigationState();
@@ -71,7 +71,7 @@ class _MainNavigationState extends State<MainNavigation> {
         ],
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: firestoreService.getTugasAkhirStream(widget.userId),
+        stream: firestoreService.getTugasAkhirStream(widget.user.uid),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             const Center(child: Text("Terjadi Kesalahan"));
@@ -83,9 +83,9 @@ class _MainNavigationState extends State<MainNavigation> {
           }
           return [
             const HomePage(),
-            TugasAkhir(userId: widget.userId),
+            TugasAkhir(userId: widget.user.uid),
             LogbookPage(tugasAkhirId: docId),
-            const BeritaPage()
+            BeritaPage(userEmail: widget.user.email!)
           ][currentPageIndex];
         },
       ),
