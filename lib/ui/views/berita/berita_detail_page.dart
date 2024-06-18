@@ -39,10 +39,7 @@ class _BeritaDetailPageState extends State<BeritaDetailPage> {
       appBar: AppBar(
         title: const Text("Detail Berita"),
         actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: _deleteBerita(),
-          ),
+          _deleteBerita(),
         ],
       ),
       body: _beritaDetail(),
@@ -89,7 +86,7 @@ class _BeritaDetailPageState extends State<BeritaDetailPage> {
     }
 
     String formatedDate =
-    DateFormat("dd MMMM yyyy").format(berita.createdAt!.toDate());
+        DateFormat("dd MMMM yyyy").format(berita.createdAt!.toDate());
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Card(
@@ -100,26 +97,19 @@ class _BeritaDetailPageState extends State<BeritaDetailPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                "${berita.judul}",
+                berita.judul,
                 style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20.0,
-                  color: Colors.blue
-                ),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                    color: Colors.blue),
               ),
               Text(
                 "Departemen ${berita.departemen}",
-                style: const TextStyle(
-                    fontSize: 16.0,
-                    color: Colors.black38
-                ),
+                style: const TextStyle(fontSize: 16.0, color: Colors.black38),
               ),
               Text(
                 "Tanggal dibuat: $formatedDate",
-                style: const TextStyle(
-                  fontSize: 16.0,
-                  color: Colors.black38
-                ),
+                style: const TextStyle(fontSize: 16.0, color: Colors.black38),
               ),
               const SizedBox(height: 20.0),
               const Text(
@@ -156,58 +146,73 @@ class _BeritaDetailPageState extends State<BeritaDetailPage> {
   }
 
   Widget _deleteBerita() {
-    return GestureDetector(
-      child: const Icon(Icons.delete),
-      onTap: () async {
-        return await showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: const Text(
-              "Hapus Logbook",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.red,
-                fontSize: 20.0,
-              ),
-            ),
-            content: const Text(
-              "Kamu yakin ingin menghapus logbook ini?",
-              style: TextStyle(
-                fontSize: 17.0,
-              ),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  // delete action
-                  _beritaService.deleteBerita(widget.beritaId);
-                  Navigator.of(context).pop(true);
-                  Navigator.of(context).pop();
-                },
-                child: const Text(
-                  "Ya",
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    color: Colors.red,
+    return FutureBuilder<String?>(
+        future: getUserRole(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            // Return an empty container while waiting for the future to complete
+            return Container();
+          }
+          // Show the floating action button only if user is Dosen
+          if (snapshot.data != 'Dosen') {
+            return Container();
+          }
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: GestureDetector(
+              child: const Icon(Icons.delete),
+              onTap: () async {
+                return await showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text(
+                      "Hapus Logbook",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.red,
+                        fontSize: 20.0,
+                      ),
+                    ),
+                    content: const Text(
+                      "Kamu yakin ingin menghapus logbook ini?",
+                      style: TextStyle(
+                        fontSize: 17.0,
+                      ),
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          // delete action
+                          _beritaService.deleteBerita(widget.beritaId);
+                          Navigator.of(context).pop(true);
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text(
+                          "Ya",
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            color: Colors.red,
+                          ),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop(true);
+                        },
+                        child: const Text(
+                          "Tidak",
+                          style: TextStyle(
+                            fontSize: 16.0,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop(true);
-                },
-                child: const Text(
-                  "Tidak",
-                  style: TextStyle(
-                    fontSize: 16.0,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
+                );
+              },
+            ),
+          );
+        });
   }
 
   // Function to get user role from Firebase Authentication
