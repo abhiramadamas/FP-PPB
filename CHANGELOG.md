@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.2.0](https://github.com/abhiramadamas/FP-PPB/compare/v1.1.0...v1.2.0) (2024-06-18)
+
+
+### Features
+
+* add consultation_proposal and schedule_proposed model ([b869a26](https://github.com/abhiramadamas/FP-PPB/commit/b869a260e4b6fa08158ec766f117328993e354ed))
+* complete schedule dosen feature ([b8010ef](https://github.com/abhiramadamas/FP-PPB/commit/b8010ef861e0c03f5e34a888b8917f9106088513))
+
+
+### Bug Fixes
+
+* increase logbook title font size ([9fc9cb9](https://github.com/abhiramadamas/FP-PPB/commit/9fc9cb9c21a2048905dc0e56620b2ad0dd6f74df))
+* only 'dosen' can create, edit, and delete news ([7131124](https://github.com/abhiramadamas/FP-PPB/commit/713112437e30c01adac72b8c0dfbe2caeb5b6331))
+
 ## [1.1.0](https://github.com/abhiramadamas/FP-PPB/compare/v1.0.0...v1.1.0) (2024-06-15)
 
 
