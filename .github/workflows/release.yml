@@ -21,13 +21,14 @@ jobs:
           cache: true
       - name: Get dependencies
         run: flutter pub get
-      - name: Start release build apk version
-        run: flutter build apk --split-per-abi
       - uses: googleapis/release-please-action@v4
         id: release
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           release-type: dart
+      - name: Start release build apk version
+        if: steps.release.outputs.release_created == 'true'
+        run: flutter build apk --split-per-abi
       - name: Upload Release Artifact
         if: steps.release.outputs.release_created == 'true'
         env:
